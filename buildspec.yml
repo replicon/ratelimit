@@ -2,8 +2,8 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      docker: latest
+    # runtime-versions:
+    #   docker: latest
   build:
     commands:
       - chmod +x ci/*.sh
