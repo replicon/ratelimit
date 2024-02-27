@@ -23,7 +23,7 @@ setEnvs
 installLamp &
 docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
 for REGION in $APP_REPO_REGIONS; do
-  eval $(aws ecr get-login --region "$REGION" --no-include-email)
+  docker login --username AWS -p $(aws ecr get-login-password --region "$REGION") 434423891815.dkr.ecr.$REGION.amazonaws.com
 done
 
 set -e
