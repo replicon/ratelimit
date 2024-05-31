@@ -30,6 +30,7 @@ set -e
 apt-get update -y
 apt-get install -y  redis-server
 
+go version
 make tests_with_redis
 
 docker version
