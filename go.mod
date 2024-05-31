@@ -1,6 +1,6 @@
 module github.com/replicon/ratelimit
 
-go 1.14
+go 1.19
 
 require (
 	github.com/alicebob/miniredis/v2 v2.13.3
