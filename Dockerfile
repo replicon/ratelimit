@@ -13,8 +13,8 @@ ARG BUILDPLATFORM
 ARG TARGETPLATFORM
 RUN if [ "$BUILDPLATFORM" = "$TARGETPLATFORM" ]; then go test -v -race github.com/replicon/ratelimit/... ; fi
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /go/bin/ratelimit -ldflags="-w -s" -v github.com/replicon/ratelimit/src/service_cmd && \
- CGO_ENABLED=0 GOOS=linux go build -o /go/bin/ratelimit_config_check -ldflags="-w -s" -v github.com/replicon/ratelimit/src/config_check_cmd
+RUN GOEXPERIMENT=boringcrypto CGO_ENABLED=1 GOOS=linux go build -o /go/bin/ratelimit -ldflags="-w -s" -v github.com/replicon/ratelimit/src/service_cmd && \
+GOEXPERIMENT=boringcrypto CGO_ENABLED=1 GOOS=linux go build -o /go/bin/ratelimit_config_check -ldflags="-w -s" -v github.com/replicon/ratelimit/src/config_check_cmd
 
 
 FROM python:3.10-alpine3.16 AS final
