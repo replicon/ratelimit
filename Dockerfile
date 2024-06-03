@@ -3,7 +3,7 @@ WORKDIR /ratelimit
 
 ENV GOPROXY=https://proxy.golang.org
 COPY go.mod go.sum /ratelimit/
-RUN yum -y update && yum groupinstall "Development Tools" && yum install -y golang && go mod download
+RUN yum -y update && yum groupinstall -y "Development Tools" && yum install -y golang && go mod download
 
 COPY src src
 COPY script script
