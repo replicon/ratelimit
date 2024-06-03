@@ -19,7 +19,7 @@ GOEXPERIMENT=boringcrypto CGO_ENABLED=1 GOOS=linux go build -o /go/bin/ratelimit
 
 FROM 434423891815.dkr.ecr.us-east-1.amazonaws.com/machine-images/fips-base:m-11320-amazon-linux-2 AS final
 
-RUN apk update && apk add --update ca-certificates curl && \
+RUN yum install python3 && \
   pip3 install ipaddress awscli && \
   mkdir -p /srv/runtime_data/current/config && \
   mkdir -p /srv/runtime_data/current/validate_config
