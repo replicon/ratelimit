@@ -1,4 +1,6 @@
 export GO111MODULE=on
+export GOEXPERIMENT=boringcrypto
+export CGO_ENABLED=1
 PROJECT = ratelimit
 REGISTRY ?= envoyproxy
 IMAGE := $(REGISTRY)/$(PROJECT)
