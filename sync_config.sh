@@ -1,5 +1,9 @@
 #!/bin/sh
 
+export AWS_USE_FIPS_ENDPOINT=${AWS_USE_FIPS_ENDPOINT}
+
+/bin/aws --version
+
 mkdir -p /extra_metrics
 /bin/python3 /metrics/main.py >/dev/null 2>&1 &
 
