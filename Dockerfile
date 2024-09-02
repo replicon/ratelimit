@@ -1,9 +1,9 @@
-FROM 434423891815.dkr.ecr.us-east-1.amazonaws.com/machine-images/fips-base:m-11878-amazon-linux-2 AS build
+FROM golang:1.19 AS build
 WORKDIR /ratelimit
 
 ENV GOPROXY=https://proxy.golang.org
 COPY go.mod go.sum /ratelimit/
-RUN yum -y update && yum groupinstall -y "Development Tools" && yum install -y golang && go mod download
+RUN go mod download
 
 COPY src src
 COPY script script
@@ -17,7 +17,7 @@ RUN GOEXPERIMENT=boringcrypto CGO_ENABLED=1 GOOS=linux go build -o /go/bin/ratel
 GOEXPERIMENT=boringcrypto CGO_ENABLED=1 GOOS=linux go build -o /go/bin/ratelimit_config_check -ldflags="-w -s" -v github.com/replicon/ratelimit/src/config_check_cmd
 
 
-FROM 434423891815.dkr.ecr.us-east-1.amazonaws.com/machine-images/fips-base:m-11878-amazon-linux-2 AS final
+FROM python:3.10-alpine3.16 AS final
 
 RUN yum install -y python3 && \
   pip3 install ipaddress awscli && \
