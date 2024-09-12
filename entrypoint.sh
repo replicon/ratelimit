@@ -1,5 +1,9 @@
 #!/bin/sh
 
+export AWS_USE_FIPS_ENDPOINT=${AWS_USE_FIPS_ENDPOINT}
+
+/usr/local/bin/aws --version
+
 export REDIS_AUTH=$(/usr/local/bin/aws ssm get-parameter --name ${REDIS_AUTH_SSM_PATH} --with-decryption --query 'Parameter.Value' --output text)
 
 nohup /sync_config.sh &
