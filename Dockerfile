@@ -1,4 +1,4 @@
-FROM 434423891815.dkr.ecr.us-east-1.amazonaws.com/machine-images/fips-base:m-12497-amazon-linux-2 AS build
+FROM 434423891815.dkr.ecr.us-east-1.amazonaws.com/machine-images/fips-base:m-15455-amazon-linux-2 AS build
 WORKDIR /ratelimit
 
 ENV GOPROXY=https://proxy.golang.org
