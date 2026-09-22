@@ -23,7 +23,7 @@ GOEXPERIMENT=boringcrypto CGO_ENABLED=1 GOOS=linux go build -o /go/bin/ratelimit
 
 FROM 434423891815.dkr.ecr.us-east-1.amazonaws.com/machine-images/fips-base:m-34423-amazon-linux-2023 AS final
 
-RUN dnf upgrade -y && dnf install -y python3 && \
+RUN dnf upgrade -y && dnf install -y python3 python3-pip && \
   pip3 install ipaddress pyyaml && \
   mkdir -p /srv/runtime_data/current/config && \
   mkdir -p /srv/runtime_data/current/validate_config
