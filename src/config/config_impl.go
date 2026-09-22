@@ -162,12 +162,12 @@ func validateYamlKeys(config RateLimitConfigToLoad, config_map map[interface{}]i
 	for k, v := range config_map {
 		if _, ok := k.(string); !ok {
 			errorText := fmt.Sprintf("config error, key is not of type string: %v", k)
-			logger.Debugf(errorText)
+			logger.Debug(errorText)
 			panic(newRateLimitConfigError(config, errorText))
 		}
 		if _, ok := validKeys[k.(string)]; !ok {
 			errorText := fmt.Sprintf("config error, unknown key '%s'", k)
-			logger.Debugf(errorText)
+			logger.Debug(errorText)
 			panic(newRateLimitConfigError(config, errorText))
 		}
 		switch v := v.(type) {
@@ -175,7 +175,7 @@ func validateYamlKeys(config RateLimitConfigToLoad, config_map map[interface{}]i
 			for _, e := range v {
 				if _, ok := e.(map[interface{}]interface{}); !ok {
 					errorText := fmt.Sprintf("config error, yaml file contains list of type other than map: %v", e)
-					logger.Debugf(errorText)
+					logger.Debug(errorText)
 					panic(newRateLimitConfigError(config, errorText))
 				}
 				element := e.(map[interface{}]interface{})
@@ -194,7 +194,7 @@ func validateYamlKeys(config RateLimitConfigToLoad, config_map map[interface{}]i
 		case nil:
 		default:
 			errorText := fmt.Sprintf("error checking config")
-			logger.Debugf(errorText)
+			logger.Debug(errorText)
 			panic(newRateLimitConfigError(config, errorText))
 		}
 	}
@@ -208,7 +208,7 @@ func (this *rateLimitConfigImpl) loadConfig(config RateLimitConfigToLoad) {
 	err := yaml.Unmarshal([]byte(config.FileBytes), &any)
 	if err != nil {
 		errorText := fmt.Sprintf("error loading config file: %s", err.Error())
-		logger.Debugf(errorText)
+		logger.Debug(errorText)
 		panic(newRateLimitConfigError(config, errorText))
 	}
 	validateYamlKeys(config, any)
@@ -217,7 +217,7 @@ func (this *rateLimitConfigImpl) loadConfig(config RateLimitConfigToLoad) {
 	err = yaml.Unmarshal([]byte(config.FileBytes), &root)
 	if err != nil {
 		errorText := fmt.Sprintf("error loading config file: %s", err.Error())
-		logger.Debugf(errorText)
+		logger.Debug(errorText)
 		panic(newRateLimitConfigError(config, errorText))
 	}
 
