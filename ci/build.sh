@@ -28,7 +28,10 @@ done
 
 set -e
 apt-get update -y
-apt-get install -y  redis-server
+apt-get install -y redis-server
+
+curl -fsSL https://go.dev/dl/go1.24.13.linux-amd64.tar.gz | tar -C /usr/local -xz
+export PATH=/usr/local/go/bin:$PATH
 
 go version
 make tests_with_redis
